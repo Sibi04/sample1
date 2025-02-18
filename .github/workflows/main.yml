@@ -3,7 +3,7 @@ name: CI/CD Pipeline for Sample1
 on:
   push:
     branches:
-      - main  # Runs when code is pushed to 'stage' branch
+      - stage  # Runs when code is pushed to 'stage' branch
 
 jobs:
   build:
@@ -20,11 +20,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r requirement.txt
+          pip install -r requirements.txt
 
       - name: Run Tests
         run: |
-          python -m pytest test_account.py
+          pytest
 
   docker:
     needs: build  # Runs only if 'build' job succeeds
@@ -52,9 +52,25 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587
-          username: ${{ secrets.EMAIL_USER }}
-          password: ${{ secrets.EMAIL_PASS }}
+          username: "psibi0604@gmail.com"  # Replace with your Gmail address
+          password: "Sibi*2004"     # Replace with your Gmail app password or normal password (if no 2FA)
           subject: "Deployment Successful"
           body: "The Docker container is running successfully!"
           to: "psibi2004@gmail.com"
           from: "GitHub Actions Bot"
+
+  deploy:
+    needs: notify  # Runs only if email is sent successfully
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Merge stage → main
+        run: |
+          git config --global user.name "Sibi04"
+          git config --global user.email "psibi2004@gmail.com"
+          git checkout main
+          git merge stage --no-ff
+          git push origin main
