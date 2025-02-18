@@ -3,7 +3,7 @@ name: CI/CD Pipeline for Sample1
 on:
   push:
     branches:
-      - stage  # Runs when code is pushed to 'stage' branch
+      - main  # Runs when code is pushed to 'stage' branch
 
 jobs:
   build:
