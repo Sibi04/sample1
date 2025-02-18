@@ -1,9 +1,9 @@
 name: CI/CD Pipeline for Sample1
 
 on:
-  push:
+  pull_request:
     branches:
-      - stage  # Runs when code is pushed to 'stage' branch
+      - main  # Runs when code is pushed to 'stage' branch
 
 jobs:
   build:
