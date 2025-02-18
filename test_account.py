@@ -1,5 +1,5 @@
 import pytest
-from new import Account, SavingsAccount, CurrentAccount  # Import classes from new.py
+from project import Account, SavingsAccount, CurrentAccount  # Import classes from new.py
 
 def test_deposit():
     acc = Account("12345", 1000)
