@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          pytest
+          python -m pytest test_account.py
 
   docker:
     needs: build  # Runs only if 'build' job succeeds
