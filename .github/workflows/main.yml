@@ -58,19 +58,3 @@ jobs:
           body: "The Docker container is running successfully!"
           to: "psibi2004@gmail.com"
           from: "GitHub Actions Bot"
-
-  deploy:
-    needs: notify  # Runs only if email is sent successfully
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Merge stage → main
-        run: |
-          git config --global user.name "Sibi04"
-          git config --global user.email "psibi2004@gmail.com"
-          git checkout main
-          git merge stage --no-ff
-          git push origin main
